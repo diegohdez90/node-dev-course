@@ -1,6 +1,3 @@
-require('./utils')
+const firstName = require('./utils')
 
-const name = "John Doe";
-
-
-console.log(name);
+console.log(firstName);
