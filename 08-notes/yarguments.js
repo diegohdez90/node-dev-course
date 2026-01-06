@@ -1,6 +1,10 @@
 const yargs = require('yargs');
 const { hideBin } = require('yargs/helpers');
-const { getNotes, addNote } = require('./notes');
+const {
+	getNotes,
+	addNote,
+	removeNote
+} = require('./notes');
 
 yargs(hideBin(process.argv))
 	.command({
@@ -29,8 +33,18 @@ yargs(hideBin(process.argv))
 	.command({
 		command: 'remove',
 		describe: 'Remove an item',
-		handler: function () {
+		builder: {
+			title: {
+				describe: 'Title of the item to remove',
+				type: 'string',
+				demandOption: true,
+			},
+		},
+		handler: function (argv) {
 			console.log('Removing item...');
+			const title = argv.title;
+			const notes = removeNote(title);
+			console.log(notes);
 		}
 	})
 	.command({
