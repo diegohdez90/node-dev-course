@@ -1,0 +1,17 @@
+{
+    "typeAcquisition": {
+        "include": [
+            "node"
+        ]
+    },
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "strict": true,
+        "esModuleInterop": true,
+        "checkJs": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
