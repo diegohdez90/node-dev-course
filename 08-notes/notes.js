@@ -18,11 +18,20 @@ const addNote = (/** @type {Object} */ note) => {
 	 */
 	const notes = getNotes();
 	notes.push(note);
-	fs.writeFileSync('notes.json', JSON.stringify(notes));
+	saveNote(notes);
 	return notes;
+}
+
+/**
+ * @param {Array<Object>} notes
+ */
+function saveNote(notes) {
+	fs.writeFileSync('notes.json', JSON.stringify(notes));
 }
 
 module.exports = {
 	getNotes,
 	addNote
 };
+
+
