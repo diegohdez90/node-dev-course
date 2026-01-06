@@ -22,7 +22,7 @@ yargs(hideBin(process.argv))
 				demandOption: true,
 			},
 		},
-		handler: function (argv) {
+		handler: (argv) => {
 			console.log('Adding item...');
 			console.log(`Value to add: ${argv.value}`);
 			console.log(`Title: ${argv.title}`);
@@ -40,7 +40,7 @@ yargs(hideBin(process.argv))
 				demandOption: true,
 			},
 		},
-		handler: function (argv) {
+		handler: (argv) => {
 			console.log('Removing item...');
 			const title = argv.title;
 			const notes = removeNote(title);
@@ -50,7 +50,7 @@ yargs(hideBin(process.argv))
 	.command({
 		command: 'list',
 		describe: 'List all items',
-		handler: function () {
+		handler: () => {
 			console.log('Listing items...');
 			/**
 			 * @type {Object[]}
@@ -62,7 +62,7 @@ yargs(hideBin(process.argv))
 	.command({
 		command: 'read',
 		describe: 'Read an item',
-		handler: function () {
+		handler: () => {
 			console.log('Reading item...');
 		}
 	})

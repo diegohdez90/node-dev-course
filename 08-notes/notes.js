@@ -41,7 +41,7 @@ const removeNote = (/** @type {string} */ title) => {
 /**
  * @param {Array<Object>} notes
  */
-function saveNote(notes) {
+const saveNote = (notes) => {
 	fs.writeFileSync('notes.json', JSON.stringify(notes));
 }
 
