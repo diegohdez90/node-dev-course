@@ -1,5 +1,6 @@
 const yargs = require('yargs');
 const { hideBin } = require('yargs/helpers');
+const { getNotes, addNote } = require('./notes');
 
 yargs(hideBin(process.argv))
 	.command({
@@ -22,6 +23,7 @@ yargs(hideBin(process.argv))
 			console.log(`Value to add: ${argv.value}`);
 			console.log(`Title: ${argv.title}`);
 			console.log(`Body: ${argv.body}`);
+			addNote({ title: argv.title, body: argv.body });
 		}
 	})
 	.command({
@@ -36,6 +38,11 @@ yargs(hideBin(process.argv))
 		describe: 'List all items',
 		handler: function () {
 			console.log('Listing items...');
+			/**
+			 * @type {Object[]}
+			 */
+			const notes = getNotes();
+			console.log(notes);
 		}
 	})
 	.command({
