@@ -13,11 +13,7 @@ const getNotes = () => {
 }
 
 const addNote = (/** @type {{title: string, body: string}} */ note) => {
-	/**
-	 * @type {{title: string, body: string}[]}
-	 */
-	const notes = getNotes();
-	const duplicateNote = notes.find(n => n.title === note.title);
+	const { duplicateNote, notes } = findNotesByTitle(note.title);
 	if (duplicateNote) {
 		console.log('Note title taken!');
 		return notes;
@@ -25,6 +21,29 @@ const addNote = (/** @type {{title: string, body: string}} */ note) => {
 	notes.push(note);
 	saveNote(notes);
 	return notes;
+}
+
+const removeNote = (/** @type {string} */ title) => {
+	const { duplicateNote, notes } = findNotesByTitle( title );
+	if (duplicateNote) {
+		const filteredNotes = notes.filter((/** @type {{ title: string; }} */ n) => n.title !== title);
+		saveNote(filteredNotes);
+		console.log('Note removed!: ', title);
+		saveNote(filteredNotes);
+		return filteredNotes;
+	} else {
+		console.log('No note found!');
+		return notes;
+	}
+}
+
+/**
+ * @param {string} title
+ */
+function findNotesByTitle(title) {
+	const notes = getNotes();
+	const duplicateNote = notes.find((/** @type {{ title: string; }} */ n) => n.title === title);
+	return { duplicateNote, notes };
 }
 
 /**
@@ -36,7 +55,8 @@ function saveNote(notes) {
 
 module.exports = {
 	getNotes,
-	addNote
+	addNote,
+	removeNote
 };
 
 
