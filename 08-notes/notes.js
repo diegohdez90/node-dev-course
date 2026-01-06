@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { default: chalk } = require('chalk');
 
 const getNotes = () => {
 	try {
@@ -13,7 +14,8 @@ const getNotes = () => {
 }
 
 const addNote = (/** @type {{title: string, body: string}} */ note) => {
-	const { duplicateNote, notes } = findNotesByTitle(note.title);
+	const notes = getNotes();
+	const duplicateNote = notes.find((/** @type {{ title: string; }} */ n) => n.title === note.title);
 	if (duplicateNote) {
 		console.log('Note title taken!');
 		return notes;
@@ -24,26 +26,16 @@ const addNote = (/** @type {{title: string, body: string}} */ note) => {
 }
 
 const removeNote = (/** @type {string} */ title) => {
-	const { duplicateNote, notes } = findNotesByTitle( title );
-	if (duplicateNote) {
-		const filteredNotes = notes.filter((/** @type {{ title: string; }} */ n) => n.title !== title);
+	const notes = getNotes();
+	const filteredNotes = notes.filter((/** @type {{ title: string; }} */ n) => n.title !== title);
+	if (filteredNotes.length !== notes.length) {
 		saveNote(filteredNotes);
-		console.log('Note removed!: ', title);
-		saveNote(filteredNotes);
+		console.log(chalk.green.inverse('Note removed!:', title));
 		return filteredNotes;
 	} else {
-		console.log('No note found!');
+		console.log(chalk.red.inverse('No note found!'));
 		return notes;
 	}
-}
-
-/**
- * @param {string} title
- */
-function findNotesByTitle(title) {
-	const notes = getNotes();
-	const duplicateNote = notes.find((/** @type {{ title: string; }} */ n) => n.title === title);
-	return { duplicateNote, notes };
 }
 
 /**
