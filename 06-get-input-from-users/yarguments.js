@@ -11,6 +11,11 @@ yargs(hideBin(process.argv))
 				type: 'string',
 				demandOption: true,
 			},
+			body: {
+				describe: 'Body of the item',
+				type: 'string',
+				demandOption: true,
+			},
 		},
 		handler: function (argv) {
 			console.log('Adding item...');
