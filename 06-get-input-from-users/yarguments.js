@@ -22,6 +22,20 @@ yargs(hideBin(process.argv))
 			console.log('Removing item...');
 		}
 	})
+	.command({
+		command: 'list',
+		describe: 'List all items',
+		handler: function () {
+			console.log('Listing items...');
+		}
+	})
+	.command({
+		command: 'read',
+		describe: 'Read an item',
+		handler: function () {
+			console.log('Reading item...');
+		}
+	})
 	.demandCommand(1, 'You need to specify at least one command')
 	.option('title', {
 		describe: 'Title of the item',
