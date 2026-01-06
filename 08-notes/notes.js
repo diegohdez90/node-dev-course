@@ -12,11 +12,16 @@ const getNotes = () => {
 	}
 }
 
-const addNote = (/** @type {Object} */ note) => {
+const addNote = (/** @type {{title: string, body: string}} */ note) => {
 	/**
-	 * @type {Object[]}
+	 * @type {{title: string, body: string}[]}
 	 */
 	const notes = getNotes();
+	const duplicateNote = notes.find(n => n.title === note.title);
+	if (duplicateNote) {
+		console.log('Note title taken!');
+		return notes;
+	}
 	notes.push(note);
 	saveNote(notes);
 	return notes;
