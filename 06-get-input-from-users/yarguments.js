@@ -21,6 +21,7 @@ yargs(hideBin(process.argv))
 			console.log('Adding item...');
 			console.log(`Value to add: ${argv.value}`);
 			console.log(`Title: ${argv.title}`);
+			console.log(`Body: ${argv.body}`);
 		}
 	})
 	.command({
