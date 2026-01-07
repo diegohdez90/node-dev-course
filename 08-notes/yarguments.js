@@ -1,7 +1,8 @@
 const yargs = require('yargs');
 const { hideBin } = require('yargs/helpers');
+const { default: chalk } = require('chalk');
 const {
-	getNotes,
+  getNotes,
 	addNote,
 	removeNote
 } = require('./notes');
@@ -51,12 +52,14 @@ yargs(hideBin(process.argv))
 		command: 'list',
 		describe: 'List all items',
 		handler: () => {
-			console.log('Listing items...');
+			console.log(chalk.bgBlue('Listing items...'));
 			/**
 			 * @type {Object[]}
 			 */
 			const notes = getNotes();
-			console.log(notes);
+      for (const note of notes) {
+        console.log('- ', note);
+      }
 		}
 	})
 	.command({
