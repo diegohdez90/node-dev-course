@@ -15,6 +15,7 @@ const loadNotes = () => {
 
 const addNote = (/** @type {{title: string, body: string}} */ note) => {
 	const notes = loadNotes();
+  debugger;
 	const duplicateNote = notes.find((/** @type {{ title: string; }} */ n) => n.title === note.title);
 	if (duplicateNote) {
 		console.log('Note title taken!');
@@ -43,6 +44,11 @@ const getNotes = () => {
     return notes.map((/** @type {{ title: string; }} */ note) => note.title);
 }
 
+const getNote = (/** @type {string} */ title) => {
+	const notes = loadNotes();
+	return notes.find((/** @type {{ title: string; }} */ note) => note.title === title);
+}
+
 /**
  * @param {Array<Object>} notes
  */
@@ -53,7 +59,8 @@ const saveNote = (notes) => {
 module.exports = {
   getNotes,
 	addNote,
-	removeNote
+	removeNote,
+  getNote
 };
 
 
