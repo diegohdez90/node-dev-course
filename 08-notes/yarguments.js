@@ -4,7 +4,8 @@ const { default: chalk } = require('chalk');
 const {
   getNotes,
 	addNote,
-	removeNote
+	removeNote,
+  getNote
 } = require('./notes');
 
 yargs(hideBin(process.argv))
@@ -65,8 +66,21 @@ yargs(hideBin(process.argv))
 	.command({
 		command: 'read',
 		describe: 'Read an item',
-		handler: () => {
-			console.log('Reading item...');
+    builder: {
+      title: {
+        describe: 'Title of the item to read',
+      }
+    },
+		handler: (argv) => {
+			const title = argv.title;
+      const note = getNote(title);
+      if (note) {
+        console.log(chalk.bgGreen('Note found:'));
+        console.log('Title:', note.title);
+        console.log('Body:', note.body);
+      } else {
+        console.log(chalk.bgRed('Note not found'));
+      }
 		}
 	})
 	.demandCommand(1, 'You need to specify at least one command')
